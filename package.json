@@ -1,0 +1,20 @@
+{
+  "name": "mevn-server",
+  "version": "1.0.0",
+  "description": "not yet",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "repository": "https://github.com/ishaltbecome/mevn-server.git",
+  "author": "Nikolay Ivanchenko <ishaltbecome@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongodb": "^4.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
