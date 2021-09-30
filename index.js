@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 
 const logger = require('./src/logger.js');
 const taskRouter = require('./src/routers/taskRouter.js');
@@ -10,6 +11,7 @@ const app = express();
 const PORT = process.env.PORT ?? 8080;
 
 app
+  .use(cors())
   .use(express.json())
   .use('/api/tasks', taskRouter);
 

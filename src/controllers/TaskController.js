@@ -10,7 +10,34 @@ const tasks = db.collection('tasks');
 class TaskController {
   static async getAllTasks(req, res) {
     try {
-      const result = await tasks.find().toArray();
+      const pipeline = [
+        {
+          '$lookup': {
+            'from': 'users', 
+            'localField': '_owner', 
+            'foreignField': '_id', 
+            'as': 'owner'
+          }
+        }, {
+          '$unwind': {
+            'path': '$owner'
+          }
+        }, {
+          '$project': {
+            'owner': '$owner.name', 
+            '_id': 1, 
+            'title': 1, 
+            'description': 1, 
+            'completed': 1, 
+            'contributors': 1, 
+            'created_at': 1, 
+            'finished_at': 1
+          }
+        }
+      ];
+
+      const result = await tasks.aggregate(pipeline).toArray();
+      // const result = await tasks.find().toArray();
       logger.info(`${req.method} ${req.originalUrl}`);
       return res.json(result);
     } catch (err) {
